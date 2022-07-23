@@ -31,10 +31,14 @@ public class CaseStudy2 {
 			switch (choice) {
 				case 1:
 					
-					System.out.println("Enter the Product Index: ");
-					int idx = scanner.nextInt();
+					//System.out.println("Enter the Product Index: ");
+					//int idx = scanner.nextInt();
 		
-					list.add(products[idx]);
+					Product product = new Product();
+					product.readProductDetails();
+					
+					//list.add(products[idx]);
+					list.add(product);
 					list.iterateForward();
 					break;
 					
@@ -57,7 +61,9 @@ public class CaseStudy2 {
 			System.out.println("Enter Your Choice: ");
 			choice = scanner.nextInt();
 			
-		}while(choice != 5);
+		}while(choice < 5);
+		
+		System.out.println("THANKS :)");
 		
 		scanner.close();
 

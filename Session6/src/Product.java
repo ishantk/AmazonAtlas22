@@ -1,3 +1,4 @@
+import java.util.Scanner;
 
 public class Product {
 	
@@ -25,6 +26,24 @@ public class Product {
 		System.out.println("Name: "+name+" Brand: "+brand);
 		System.out.println("Quantity: "+quantity+" Price: "+price);
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+	}
+	
+	void readProductDetails() {
+		Scanner scanner = new Scanner(System.in);
+		
+		System.out.println("Enter Product Name: ");
+		name = scanner.nextLine();
+		
+		System.out.println("Enter Product Brand: ");
+		brand = scanner.nextLine();
+		
+		System.out.println("Enter Product Quantity: ");
+		quantity = scanner.nextInt();
+		
+		System.out.println("Enter Product Price: ");
+		price = scanner.nextInt();
+		
+		//scanner.close();
 	}
 	
 }
