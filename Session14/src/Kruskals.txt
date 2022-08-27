@@ -1,0 +1,287 @@
+Kruskals
+--------
+    1. Sort the Edges based on Weight -> Non Decreasing Order
+    2. Pick Up the Edge with smallest weight and add to Graph
+        Condition1: It should not form a cycle
+        Condition2: Edges are always V-1
+
+
+--------------------
+Disjoint Sets
+A = {1,2,3}
+B = {4,5}
+
+2 or more Sets when they have nothing in common are known as Disjoint Sets
+A and B are Disjoint :)
+
+
+----------------------
+Usage of Disjoint Sets
+    1. Find Operation
+    2. Union Operation
+
+    Find(1, 3) -> true
+    Find(1, 5) -> false
+
+    Union of A and B is C
+    Union(A, B) => C
+    C = {1, 2, 3, 4, 5}
+
+
+----------------------
+Set stores data as BST with no duplicate element :)
+A = {1, 2, 3}
+    
+    T1:
+    1
+     \
+      2
+       \
+        3
+
+    T2:
+    2
+   / \ 
+  1   3
+
+  We can represent a Set as an Array  
+  T1:
+  Nodes     1   2   3
+  Parent   -1   1   2 
+
+
+  T2:
+  Nodes     1   2   3
+  Parent    2  -1   2 
+
+
+----------------------
+
+A = {1, 2, 3}
+B = {4, 5, 6}
+
+A and B are Disjoint Sets as they have nothing in common a of now
+
+    Tree Rep of A
+        3
+       /  
+      2
+     /
+    1 
+
+    AR(3) -> 3
+    
+    R(2)  -> 3
+    AR(2) -> 3
+    
+    R(1)  -> 2
+    AR(1) -> 3
+
+    Tree Rep of B
+        6
+       /  
+      5
+     /
+    4 
+
+    AR(6) -> 6
+    AR(5) -> 6
+    AR(4) -> 6
+
+  We can represent Disjoint Sets in a SINGLE Array  
+  --------------------------------
+  Nodes     1   2   3   4   5   6
+  --------------------------------
+  Parent    2   3  -1   5   6  -1 
+  --------------------------------
+
+  Find(2, 5) 
+
+  Algo: 
+    Absolute Root of 2 elements if it is same -> They belong to same Set else not
+    Jump the Array
+
+    Find(2, 5) -> 
+
+    AR(2) -> 3
+    AR(5) -> 6
+
+    As AR(2) != AR(5) => false :)
+
+
+    Tree of A
+        3
+       / \
+      2   5    
+     /
+    1  
+
+    Tree of B
+        6
+       / \
+      7   8
+
+    Tree of C
+        4
+
+  We can represent Disjoint Sets A, B and C in a SINGLE Array  
+  ----------------------------------------
+  Nodes     1   2   3   4   5   6   7   8
+  ----------------------------------------
+  Parent    2   3  -1  -1   3  -1   6   6   
+  ----------------------------------------
+
+  Find(2, 4) 
+    AR(2) -> 3
+    AR(4) -> 4
+    hence, false
+
+  Find(1, 5)
+    AR(1) -> 3
+    AR(5) -> 3
+    hence, true
+
+  Find(1, 8)
+    AR(1) -> 3
+    AR(8) -> 6
+    hence, false
+
+
+----------------------
+Union Operation
+
+    Set A = {1, 2, 3}
+    Tree Rep of A
+        3
+       /  
+      2
+     /
+    1 
+  
+   Set B = {4, 5, 6}
+    Tree Rep of B
+        6
+       /  
+      5
+     /
+    4 
+
+ Union(A, B)
+ Set C = {1, 2, 3, 4, 5, 6}
+
+  We can represent Disjoint Sets in a SINGLE Array  
+  --------------------------------
+  Nodes     1   2   3   4   5   6
+  --------------------------------
+  Parent    2   3  -1   5   6  -1 
+  --------------------------------
+
+  --------------------------------
+  Nodes     1   2   3   4   5   6
+  --------------------------------
+  Parent    2   3   6   5   6  -1 
+  --------------------------------
+
+
+
+----------------------
+Detect Cycle in Graph
+
+Edge List
+(0, 1)
+(0, 3)
+(2, 3)
+(1, 2)
+
+Start Creating a Graph with these Edges :)
+
+
+  Step1:
+  ------------------------
+  Nodes     0   1   2   3
+  ------------------------
+  Parent   -1  -1  -1  -1      
+  ------------------------
+
+  Step2:
+  Add Edge (0, 1)
+  ------------------------
+  Nodes     0   1   2   3
+  ------------------------
+  Parent   -1  -1  -1  -1      
+  ------------------------
+
+  Find(0, 1)
+  AR(0) -> 0
+  AR(1) -> 1
+  They are in different Sets
+  We will create an Edge
+
+  Union(0, 1)
+  ------------------------
+  Nodes     0   1   2   3
+  ------------------------
+  Parent    1  -1  -1  -1      
+  ------------------------
+
+  Step3:
+  Add Edge (0, 3)
+  ------------------------
+  Nodes     0   1   2   3
+  ------------------------
+  Parent    1  -1  -1  -1      
+  ------------------------
+
+  Find(0, 3)
+  AR(0) -> 1
+  AR(3) -> 3
+  They are in different Sets
+  We will create an Edge
+
+  Union(0, 3)
+  ------------------------
+  Nodes     0   1   2   3
+  ------------------------
+  Parent    1   3  -1  -1      
+  ------------------------
+
+  Step4:
+  Add Edge (2, 3)
+  ------------------------
+  Nodes     0   1   2   3
+  ------------------------
+  Parent    1   3  -1  -1      
+  ------------------------
+
+  Find(2, 3)
+  AR(2) -> 2
+  AR(3) -> 3
+  They are in different Sets
+  We will create an Edge
+
+  Union(2, 3)
+  ------------------------
+  Nodes     0   1   2   3
+  ------------------------
+  Parent    1   3   3  -1      
+  ------------------------
+
+  Step5:
+  Add Edge (1, 2)
+  ------------------------
+  Nodes     0   1   2   3
+  ------------------------
+  Parent    1   3   3  -1      
+  ------------------------
+
+  Find(1, 2)
+  AR(2) -> 3
+  AR(3) -> 3
+  They are in same Sets
+  We will now, not create an Edge as it will form a Cycle :)
+  
+
+
+
+
+
