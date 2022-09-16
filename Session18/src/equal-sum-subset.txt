@@ -1,0 +1,37 @@
+SET = {1, 2, 3, 4}
+SUM = 10
+
+In case the Sum is EVEN only then SUBSETs can be found else i.e. for ODD Sum, the problem is not solvable :)
+
+Partition the SET in 2 sub sets with EQUAL SUM
+SET1 = {1, 4}
+SUM1 = 5
+
+SET2 = {2, 3}
+SUM2 = 5
+
+Subsets should have sum as SUM/2
+
+
+SUB_SET_1 = {......}
+SUM_TARGET = SUM/2 -> 5
+
+From the SET either we can include element or exclude element :)
+
+Include 1
+SUB_SET_1 = {1}
+SUM_TARGET = 5 [5-1] => 4
+
+Include 2
+SUB_SET_1 = {1, 2}
+SUM_TARGET = 4 [4-2] => 2
+
+Include 3
+SUB_SET_1 = {1, 2, 3}
+SUM_TARGET = 2 [2-3] => -1 Hence, this is not going to work
+
+Include 4
+SUB_SET_1 = {1, 2, 4}
+SUM_TARGET = 2 [2-4] => -2 Hence, this is not going to work
+
+We need to work in a way of inclusion and exclusion and validate all the possible combinations
